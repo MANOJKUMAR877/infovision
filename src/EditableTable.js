@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Input, InputNumber, Popconfirm, Form, Typography,Button,Space } from "antd";
+import { Table, Input, InputNumber, Popconfirm, Form, Typography,Button,Space, message } from "antd";
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import originData from "./data";
@@ -152,13 +152,16 @@ const handleSearch = (selectedKeys, confirm, dataIndex) => {
         newData.splice(index, 1, { ...item, ...row });
         setData(newData);
         setEditingKey("");
+        message.info('saved')
       } else {
         newData.push(row);
         setData(newData);
         setEditingKey("");
+        message.info('saved')
       }
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);
+      message.error('saved')
     }
   };
 
