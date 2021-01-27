@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css';
-import EditableTable from './EditableTable';
+import EditableTable from './component/EditableTable';
 export default class App extends Component {
   render() {
     return (

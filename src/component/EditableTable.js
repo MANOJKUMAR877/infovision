@@ -1,9 +1,18 @@
 import React, { useState } from "react";
-import { Table, Input, InputNumber, Popconfirm, Form, Typography,Button,Space, message } from "antd";
-import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
-import originData from "./data";
-
+import {
+  Table,
+  Input,
+  InputNumber,
+  Popconfirm,
+  Form,
+  Typography,
+  Button,
+  Space,
+  message,
+} from "antd";
+import Highlighter from "react-highlight-words";
+import { SearchOutlined } from "@ant-design/icons";
+import originData from "../data";
 
 const EditableCell = ({
   editing,
@@ -61,19 +70,25 @@ const EditableTable = () => {
     });
     setEditingKey(record.key);
   };
-  const [searchText, updateSearchText] = useState('');
-const [searchedColumn, updateSearchcolumn] = useState('');
+  const [searchText, updateSearchText] = useState("");
+  const [searchedColumn, updateSearchcolumn] = useState("");
 
- const getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => (
       <div style={{ padding: 8 }}>
         <Input
-          
           placeholder={`Search ${dataIndex}`}
           value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
+          style={{ width: 188, marginBottom: 8, display: "block" }}
         />
         <Space>
           <Button
@@ -85,7 +100,11 @@ const [searchedColumn, updateSearchcolumn] = useState('');
           >
             Search
           </Button>
-          <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+          <Button
+            onClick={() => handleReset(clearFilters)}
+            size="small"
+            style={{ width: 90 }}
+          >
             Reset
           </Button>
           <Button
@@ -93,9 +112,8 @@ const [searchedColumn, updateSearchcolumn] = useState('');
             size="small"
             onClick={() => {
               confirm({ closeDropdown: false });
-               updateSearchText( selectedKeys[0])
-                 updateSearchcolumn(dataIndex)
-              
+              updateSearchText(selectedKeys[0]);
+              updateSearchcolumn(dataIndex);
             }}
           >
             Filter
@@ -103,39 +121,43 @@ const [searchedColumn, updateSearchcolumn] = useState('');
         </Space>
       </div>
     ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    filterIcon: (filtered) => (
+      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+    ),
     onFilter: (value, record) =>
       record[dataIndex]
-        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-        : '',
-    onFilterDropdownVisibleChange: visible => {
+        ? record[dataIndex]
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        : "",
+    onFilterDropdownVisibleChange: (visible) => {
       if (visible) {
-        
       }
     },
-    render: text =>
+    render: (text) =>
       searchedColumn === dataIndex ? (
         <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
           searchWords={[searchText]}
           autoEscape
-          textToHighlight={text ? text.toString() : ''}
+          textToHighlight={text ? text.toString() : ""}
         />
       ) : (
         text
       ),
   });
 
-const handleSearch = (selectedKeys, confirm, dataIndex) => {
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
-    updateSearchText( selectedKeys[0])
-                
-    updateSearchcolumn(dataIndex)
+    updateSearchText(selectedKeys[0]);
+
+    updateSearchcolumn(dataIndex);
   };
 
- const handleReset = clearFilters => {
+  const handleReset = (clearFilters) => {
     clearFilters();
-   updateSearchText('')
+    updateSearchText("");
   };
   const cancel = () => {
     setEditingKey("");
@@ -152,16 +174,16 @@ const handleSearch = (selectedKeys, confirm, dataIndex) => {
         newData.splice(index, 1, { ...item, ...row });
         setData(newData);
         setEditingKey("");
-        message.info('saved')
+        message.success("saved", 2);
       } else {
         newData.push(row);
         setData(newData);
         setEditingKey("");
-        message.info('saved')
+        message.success("saved", 2);
       }
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);
-      message.error('saved')
+      message.error("Error");
     }
   };
 
@@ -171,63 +193,63 @@ const handleSearch = (selectedKeys, confirm, dataIndex) => {
       dataIndex: "type",
       width: "15%",
       editable: false,
-      ...getColumnSearchProps('type')
+      ...getColumnSearchProps("type"),
     },
     {
       title: "AR Media 1- USDZ(url)",
       dataIndex: "turnleft",
       width: "15%",
       editable: true,
-      ...getColumnSearchProps('turnleft')
+      
     },
     {
       title: "AR Media 1- GLB(url) ",
       dataIndex: "turnright",
       width: "15%",
       editable: true,
-      ...getColumnSearchProps('turnright')
+      
     },
     {
       title: "AR Media 2- USDZ(url) ",
       dataIndex: "armedia1",
       width: "15%",
       editable: true,
-      ...getColumnSearchProps('armedia1')
+     
     },
     {
       title: "AR Media 2- GLB(url) ",
       dataIndex: "armedia2",
       width: "15%",
       editable: true,
-      ...getColumnSearchProps('armedia2')
+      
     },
     {
       title: "2D Target (url)",
       dataIndex: "twodtarget",
       width: "15%",
       editable: true,
-      ...getColumnSearchProps('twotarget')
+   
     },
     {
       title: "Mascot Mode(Y/N)",
       dataIndex: "mascot",
       width: "15%",
       editable: false,
-      ...getColumnSearchProps('mascot')
+      
     },
     {
       title: "Latitude",
       dataIndex: "latitude",
       width: "15%",
       editable: true,
-      ...getColumnSearchProps('latitude')
+     
     },
     {
       title: "Longitude",
       dataIndex: "longitude",
       width: "15%",
       editable: true,
-      ...getColumnSearchProps('longitude')
+      
     },
     {
       title: "Operation",
@@ -246,7 +268,7 @@ const handleSearch = (selectedKeys, confirm, dataIndex) => {
               Save
             </a>
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a style={{color:'red'}}>Cancel</a>
+              <a style={{ color: "red" }}>Cancel</a>
             </Popconfirm>
           </span>
         ) : (
@@ -278,7 +300,7 @@ const handleSearch = (selectedKeys, confirm, dataIndex) => {
   });
 
   return (
-    <Form form={form} component={false} >
+    <Form form={form} component={false}>
       <Table
         components={{
           body: {
@@ -292,7 +314,6 @@ const handleSearch = (selectedKeys, confirm, dataIndex) => {
         pagination={{
           onChange: cancel,
         }}
-       
       />
     </Form>
   );
