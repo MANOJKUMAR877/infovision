@@ -1,6 +1,6 @@
 const originData = [
     {
-        id: 0,
+        key: 0,
         type: "Banner",
         armedia1: "v2.com/1",
         armedia2: "v2.com/12",
@@ -12,7 +12,7 @@ const originData = [
         mascot: "<null>",
       },
       {
-        id: 1,
+        key: 1,
         type: "Banner",
         armedia1: "v2.com/2",
         armedia2: "v2.com/22",
@@ -24,7 +24,7 @@ const originData = [
         mascot: "<null>",
       },
       {
-        id: 2,
+        key: 2,
         type: "Banner",
         armedia1: "v2.com/3",
         armedia2: "v2.com/32",
@@ -36,7 +36,7 @@ const originData = [
         mascot: "<null>",
       },
       {
-        id: 3,
+        key: 3,
         type: "Un Boxing",
         armedia1: "v2.com/4",
         armedia2: "v2.com/42",
@@ -48,7 +48,7 @@ const originData = [
         mascot: "<null>",
       },
       {
-        id: 4,
+        key: 4,
         type: "No Banner",
         armedia1: "v2.com/5",
         armedia2: "v2.com/52",

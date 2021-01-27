@@ -19,6 +19,7 @@ const EditableCell = ({
         ? (
             <Form.Item 
               name={dataIndex}
+             
               style={{
                 margin: 0,
               }}
@@ -90,6 +91,7 @@ const EditableTable = () => {
       dataIndex: "type",
       width: "15%",
       editable: false,
+      
     },
     {
       title: "Ar Media 1- USDZ(url)",

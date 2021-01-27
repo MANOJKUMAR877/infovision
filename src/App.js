@@ -4,7 +4,7 @@ import EditableTable from './EditableTable';
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <div className="container"> 
         <EditableTable/>
       </div>
     )
