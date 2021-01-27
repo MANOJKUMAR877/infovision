@@ -93,11 +93,8 @@ const [searchedColumn, updateSearchcolumn] = useState('');
             size="small"
             onClick={() => {
               confirm({ closeDropdown: false });
-               
-                
-                updateSearchText( selectedKeys[0])
-                
-                updateSearchcolumn(dataIndex)
+               updateSearchText( selectedKeys[0])
+                 updateSearchcolumn(dataIndex)
               
             }}
           >
@@ -212,7 +209,7 @@ const handleSearch = (selectedKeys, confirm, dataIndex) => {
       title: "Mascot Mode(Y/N)",
       dataIndex: "mascot",
       width: "15%",
-      editable: true,
+      editable: false,
       ...getColumnSearchProps('mascot')
     },
     {
@@ -223,7 +220,7 @@ const handleSearch = (selectedKeys, confirm, dataIndex) => {
       ...getColumnSearchProps('latitude')
     },
     {
-      title: "longitude",
+      title: "Longitude",
       dataIndex: "longitude",
       width: "15%",
       editable: true,
