@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Table,
   Input,
-  InputNumber,
   Popconfirm,
   Form,
   Typography,
@@ -26,16 +25,28 @@ const EditableCell = ({
   disabled,
   ...restProps
 }) => {
-   Object.key(record).map(e=>{console.log(e)})
+  let conditions="";
+  if(dataIndex !== undefined){
+    let check= dataIndex;
+    if(check.includes("_")){
+      let split=check.split("_");
+      console.log("split",split)
+      let key=split[0]+"_edit"
+      if(key !== undefined){
+        console.log("split[0].edit",key)
+        conditions=record[key]
+      }
+    }
+  }
+  console.log("condition",dataIndex,conditions)
+  const inputNode = conditions ? <Input /> : "Cannot edit";
 
-  const inputNode = <Input  />;
 
   return (
     <td {...restProps}>
       {editing ? (
         <Form.Item
           name={dataIndex}
-          
           style={{
             margin: 0,
           }}
@@ -209,7 +220,7 @@ const EditableTable = () => {
       render(text, record) {
         return {
           props: {
-            style: { background: record.turnleft_edit ? "green" : "red" },
+            style: { background: record.turnleft_edit ? "" : "#808080" },
           },
           children: <div>{text}</div>,
         };
@@ -223,7 +234,7 @@ const EditableTable = () => {
       render(text, record) {
         return {
           props: {
-            style: { background: record.turnright_edit ? "green" : "red" },
+            style: { background: record.turnright_edit ? "" : "#808080" },
           },
           children: <div>{text}</div>,
         };
@@ -237,7 +248,7 @@ const EditableTable = () => {
       render(text, record) {
         return {
           props: {
-            style: { background: record.armedia1_edit ? "green" : "red" },
+            style: { background: record.armedia1_edit ? "" : "#808080" },
           },
           children: <div>{text}</div>,
         };
@@ -251,7 +262,7 @@ const EditableTable = () => {
       render(text, record) {
         return {
           props: {
-            style: { background: record.armedia2_edit ? "green" : "red" },
+            style: { background: record.armedia2_edit ? "" : "#808080" },
           },
           children: <div>{text}</div>,
         };
@@ -265,7 +276,7 @@ const EditableTable = () => {
       render(text, record) {
         return {
           props: {
-            style: { background: record.twotarget_edit ? "green"  : "red" },
+            style: { background: record.twotarget_edit ? "" : "#808080" },
           },
           children: <div>{text}</div>,
         };
@@ -280,7 +291,7 @@ const EditableTable = () => {
       render(text, record) {
         return {
           props: {
-            style: { background: record.latitude_edit ? "green" : "red" },
+            style: { background: record.latitude_edit ? "" : "#808080" },
           },
           children: <div>{text}</div>,
         };
@@ -294,7 +305,7 @@ const EditableTable = () => {
       render(text, record) {
         return {
           props: {
-            style: { rowClassName: record.longitude_edit ?'disabled-row':''},
+            style: { background: record.longitude_edit ? "" : "#808080" },
           },
           children: <div>{text}</div>,
         };
@@ -350,7 +361,7 @@ const EditableTable = () => {
 
   return (
     <Form form={form} component={false}>
-      <Table 
+      <Table
         components={{
           body: {
             cell: EditableCell,
