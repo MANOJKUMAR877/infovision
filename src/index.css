@@ -20,3 +20,10 @@ code {
   top: 100%;
   font-size: 12px;
 }
+disable{
+  opacity: 0.2;
+}
+.disabled-row {
+  background-color: #dcdcdc;
+  pointer-events: none;
+}

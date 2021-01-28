@@ -12,7 +12,7 @@ import {
 } from "antd";
 import Highlighter from "react-highlight-words";
 import { SearchOutlined } from "@ant-design/icons";
-import originData from "../data";
+import originData from "../dataNew";
 
 const EditableCell = ({
   editing,
@@ -22,14 +22,20 @@ const EditableCell = ({
   record,
   index,
   children,
+  condition,
+  disabled,
   ...restProps
 }) => {
-  const inputNode = inputType === "number" ? <InputNumber /> : <Input />;
+   Object.key(record).map(e=>{console.log(e)})
+
+  const inputNode = <Input  />;
+
   return (
     <td {...restProps}>
       {editing ? (
         <Form.Item
           name={dataIndex}
+          
           style={{
             margin: 0,
           }}
@@ -58,14 +64,13 @@ const EditableTable = () => {
 
   const edit = (record) => {
     form.setFieldsValue({
-      armedia1: "",
-      armedia2: "",
-      twodtarget: "",
-      turnleft: "",
-      turnright: "",
-      latitude: "",
-      longitude: "",
-      mascot: "",
+      armedia1_value: "",
+      armedia2_value: "",
+      twodtarget_value: "",
+      turnleft_value: "",
+      turnright_value: "",
+      latitude_value: "",
+      longitude_value: "",
       ...record,
     });
     setEditingKey(record.key);
@@ -197,59 +202,103 @@ const EditableTable = () => {
     },
     {
       title: "AR Media 1- USDZ(url)",
-      dataIndex: "turnleft",
+      dataIndex: "turnleft_value",
       width: "15%",
       editable: true,
-      
+      condition: "turnleft_edit",
+      render(text, record) {
+        return {
+          props: {
+            style: { background: record.turnleft_edit ? "green" : "red" },
+          },
+          children: <div>{text}</div>,
+        };
+      },
     },
     {
       title: "AR Media 1- GLB(url) ",
-      dataIndex: "turnright",
+      dataIndex: "turnright_value",
       width: "15%",
       editable: true,
-      
+      render(text, record) {
+        return {
+          props: {
+            style: { background: record.turnright_edit ? "green" : "red" },
+          },
+          children: <div>{text}</div>,
+        };
+      },
     },
     {
       title: "AR Media 2- USDZ(url) ",
-      dataIndex: "armedia1",
+      dataIndex: "armedia1_value",
       width: "15%",
       editable: true,
-     
+      render(text, record) {
+        return {
+          props: {
+            style: { background: record.armedia1_edit ? "green" : "red" },
+          },
+          children: <div>{text}</div>,
+        };
+      },
     },
     {
       title: "AR Media 2- GLB(url) ",
-      dataIndex: "armedia2",
+      dataIndex: "armedia2_value",
       width: "15%",
       editable: true,
-      
+      render(text, record) {
+        return {
+          props: {
+            style: { background: record.armedia2_edit ? "green" : "red" },
+          },
+          children: <div>{text}</div>,
+        };
+      },
     },
     {
       title: "2D Target (url)",
-      dataIndex: "twodtarget",
+      dataIndex: "twodtarget_value",
       width: "15%",
       editable: true,
-   
+      render(text, record) {
+        return {
+          props: {
+            style: { background: record.twotarget_edit ? "green"  : "red" },
+          },
+          children: <div>{text}</div>,
+        };
+      },
     },
-    {
-      title: "Mascot Mode(Y/N)",
-      dataIndex: "mascot",
-      width: "15%",
-      editable: false,
-      
-    },
+
     {
       title: "Latitude",
-      dataIndex: "latitude",
+      dataIndex: "latitude_value",
       width: "15%",
       editable: true,
-     
+      render(text, record) {
+        return {
+          props: {
+            style: { background: record.latitude_edit ? "green" : "red" },
+          },
+          children: <div>{text}</div>,
+        };
+      },
     },
     {
       title: "Longitude",
-      dataIndex: "longitude",
+      dataIndex: "longitude_value",
       width: "15%",
       editable: true,
-      
+      render(text, record) {
+        return {
+          props: {
+            style: { rowClassName: record.longitude_edit ?'disabled-row':''},
+          },
+          children: <div>{text}</div>,
+        };
+      },
     },
     {
       title: "Operation",
@@ -301,7 +350,7 @@ const EditableTable = () => {
 
   return (
     <Form form={form} component={false}>
-      <Table
+      <Table 
         components={{
           body: {
             cell: EditableCell,
